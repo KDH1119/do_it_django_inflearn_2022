@@ -87,41 +87,47 @@
     <div class="container mt-3">
 
         <h1>Blog</h1>
-            <div class="row">
-                <div class="col-lg-8">
+        <div class="row">
+            <div class="col-lg-8" id="main-area">
 
-        {% for p in post_list %}
+                {% if post_list.exists %}
+                {% for p in post_list %}
 
-        <div class="card mb-4">
-            {% if p.head_image %}
-                <img src="{{ p.head_image.url }}" alt="" class="card-img-top">
-            {% else %}
-                <img src="https://picsum.photos/seed/{{ p.pk }}{{ p.pk }}/600/450" alt="">
-            {% endif %}
-            <div class="card-body">
-                <h2 class="card-title">
-                    {{ p.title }}
-                </h2>
-                {% if p.hook_text %}
-                    <h5 class="text-muted">
-                        {{ p.hook_text }}
-                    </h5>
-                {% endif %}
+                <div class="card mb-4">
+                    {% if p.head_image %}
+                        <img src="{{ p.head_image.url }}" alt="" class="card-img-top">
+                    {% else %}
+                        <img src="https://picsum.photos/seed/{{ p.pk }}{{ p.pk }}/600/450" alt="">
+                    {% endif %}
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            {{ p.title }}
+                        </h2>
+                        {% if p.hook_text %}
+                            <h5 class="text-muted">
+                                {{ p.hook_text }}
+                            </h5>
+                        {% endif %}
 
-                <p class="card-text">
-                    {{ p.content | truncatewords:45 }}
-                </p>
-                <a href="{{ p.get_absolute_url }}" class="btn btn-primary">
-                    Read More &rarr;
-                </a>
+                        <p class="card-text">
+                            {{ p.content | truncatewords:45 }}
+                        </p>
+                        <a href="{{ p.get_absolute_url }}" class="btn btn-primary">
+                            Read More &rarr;
+                        </a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ p.created_at }} by <a href="#">작성자</a>
+                    </div>
+
+                </div>
+                {% endfor %}
             </div>
-            <div class="card-footer text-muted">
-                {{ p.created_at }} by <a href="#">작성자</a>
-            </div>
+                    {% else %}
+                        <h1>아직 게시물이 없습니다.</h1>
+        {% endif %}
 
-        </div>
-        {% endfor %}
-    </div>
+
 
     <div class="col-lg-4">
         <div class="card mb-4">
