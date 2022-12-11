@@ -96,18 +96,39 @@
                         </h2>
                         <h4>
                             by <a href="#">
-                            작성자명 쓸 위치
+                            작성자
                         </a><hr>
                         </h4>
                         <h4 class="card-text">
                             Posted on {{ post.created_at }}
                         </h4>
                         <hr>
-                        <img src="https://via.placeholder.com/750x300?text=Visit+Blogging.com+Now    " alt="Card image cap" class="card-img-top">
+                        {% if post.head_image %}
+                            <img src="{{ post.head_image.url }}" alt="" class="card-img-top">
+                        {% else %}
+                            <img src="https://picsum.photos/seed/{{ post.pk }}{{ post.pk }}/600/450" alt="">
+                        {% endif %}
                         <hr>
                         <p>
                             {{ post.content }}
                         </p>
+                        {% if post.file_upload %}
+                        <a href="{{ post.file_upload.url }}" type="button" class="btn btn-outline-dark" role="button" download>
+                            Download:
+                            {% if post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
+                                <i class="far fa-file-excel"></i>
+                            {% elif post.get_file_ext == 'csv' %}
+                                <i class="far fa-file-csv"></i>
+                            {% elif post.get_file_ext == 'docx' %}
+                                <i class="far fa-file-word"></i>
+                            {% else %}
+                                <i class="far fa-file-alt"></i>
+                            {% endif %}
+                            {{ post.get_file_name }}
+                        </a>
+
+                        {% endif %}
+
                         <hr>
                     </div>
 
