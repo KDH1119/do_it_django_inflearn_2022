@@ -94,11 +94,17 @@
                         <h2 class="card-title">
                             {{ post.title }}
                         </h2>
-                        <h4>
+                        {% if post.hook_text %}
+                        <h5 class="text-muted">
+                            {{ post.hook_text }}
+                        </h5>
+                        {% endif %}
+
+                        <h5>
                             by <a href="#">
                             작성자
                         </a><hr>
-                        </h4>
+                        </h5>
                         <h4 class="card-text">
                             Posted on {{ post.created_at }}
                         </h4>

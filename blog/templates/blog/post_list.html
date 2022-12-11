@@ -102,8 +102,14 @@
                 <h2 class="card-title">
                     {{ p.title }}
                 </h2>
+                {% if p.hook_text %}
+                    <h5 class="text-muted">
+                        {{ p.hook_text }}
+                    </h5>
+                {% endif %}
+
                 <p class="card-text">
-                    {{ p.content }}
+                    {{ p.content | truncatewords:45 }}
                 </p>
                 <a href="{{ p.get_absolute_url }}" class="btn btn-primary">
                     Read More &rarr;
