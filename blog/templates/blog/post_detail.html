@@ -9,6 +9,11 @@
 <div class="card mb-4">
     <div class="card-body">
         <div id="post-area">
+            {% if post.category %}
+            <span class="badge badge-primary float-right">{{ post.category }}</span>
+            {% else %}
+            <span class="badge badge-primary float-right">미분류</span>
+            {% endif %}
             <h2 class="card-title">
                 {{ post.title }}
             </h2>
@@ -60,7 +65,7 @@
 </div>
 <hr>
 
-<div class="card">
+<div class="card my-3">
     <div class="card-header">
         Leave a Comment:
     </div>
