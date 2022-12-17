@@ -117,9 +117,9 @@ class TestView(TestCase):
 
         self.assertIn(self.post_001.title, post_001_card.text)
         self.assertIn(self.post_001.category.name, post_001_card.text)
+        self.assertIn(self.tag_hello.name, post_001_card.text)
         self.assertNotIn(self.tag_python.name, post_001_card.text)
         self.assertNotIn(self.tag_python_kor.name, post_001_card.text)
-        self.assertIn(self.tag_hello.name, post_001_card.text)
 
         post_002_card = main_area.find('div', id='post-2')
         self.assertIn(self.post_002.title, post_002_card.text)
@@ -187,6 +187,9 @@ class TestView(TestCase):
         # 2.6 첫 번째 포스트의 내용이 포스트 영역에 있다.
         self.assertIn(self.user_trump.username.upper(), post_area.text)
         self.assertIn(self.post_001.content, post_area.text)
+        self.assertIn(self.tag_hello.name, post_area.text)
+        self.assertNotIn(self.tag_python.name, post_area.text)
+        self.assertNotIn(self.tag_python_kor.name, post_area.text)
 
     def test_category_page(self):
         response = self.client.get(self.category_programming.get_absolute_url())
