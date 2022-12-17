@@ -4,7 +4,12 @@
 <h1>
     Blog
     {% if category %}
-        <span class="badge badge-primary">{{ category }}</span>
+    <span class="badge badge-primary">{{ category }}</span>
+    {% endif %}
+    {% if tag %}
+    <span class="badge bg-light text-dark">
+        <i class="fas fa-tags"></i> {{ tag }} ({{ tag.post_set.count }})</a>
+    </span>
     {% endif %}
 </h1>
 
@@ -37,12 +42,14 @@
         </p>
 
         {% if p.tags.exists %}
-            <i class="fas fa-tags"></i>
-            {% for tag in p.tags.iterator %}
-                <a class="badge bg-light text-dark" href="{{ tag.get_absolut_url }}">#{{ tag }}</a>
-            {% endfor %}
-            <br>
-            <br>
+        <i class="fas fa-tags"></i>
+        {% for tag in p.tags.iterator %}
+        <span class="badge bg-light text-dark">
+                <a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
+                </span>
+        {% endfor %}
+        <br>
+        <br>
         {% endif %}
 
         <a href="{{ p.get_absolute_url }}" class="btn btn-primary">

@@ -43,20 +43,18 @@ def category_page(request, slug):
         }
     )
 
+
 def tag_page(request, slug):
-    if slug == 'no_tag':
-        tag = '미분류'
-        post_list = Post.objects.filter(tag=tag)
-    else:
-        tag = Category.objects.get(slug=slug)
-        post_list = Post.objects.filter(tag=tag)
+    tag = Tag.objects.get(slug=slug)
+    post_list = tag.post_set.all()
 
     return render(
         request,
         'blog/post_list.html',
         {
             'post_list': post_list,
-            'tags': Tag.objects.all(),
+            'categories': Category.objects.all(),
+            'no_category_post_count': Post.objects.filter(category=None).count(),
             'tag': tag,
         }
     )
