@@ -3,6 +3,13 @@
 {% block main_area %}
 <h1>
     Blog
+    {% if user.is_authenticated %}
+    {% if user.is_superuser or user.is_staff %}
+    <a type="button" href="/blog/create_post/" class="btn btn-info btn-sm float-right">
+        <i class="fas fa-pen"></i>
+        &nbsp;&nbsp;New Post</a>
+    {% endif %}
+    {% endif %}
     {% if category %}
     <span class="badge badge-primary">{{ category }}</span>
     {% endif %}
