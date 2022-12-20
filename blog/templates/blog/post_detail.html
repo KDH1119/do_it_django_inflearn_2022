@@ -79,26 +79,36 @@
 
     </div>
 </div>
-<hr>
 
-<div class="card my-3">
-    <div class="card-header">
-        Leave a Comment:
-    </div>
-    <div class="container mt-3 my-3">
-        <div class="input-group">
-            <input type="text" class="form-control"
-                   style="height:90px;"
-                   aria-label="Text input with segmented dropdown button">
-            <div class="input-group-append">
-            </div>
+<div id="comment-area">
+    <div class="card my-4">
+        <div class="card-header">
+            Leave a Comment:
         </div>
-        <br>
-        <button text="button" class="btn btn-primary">
-            Input
-        </button>
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <textarea rows="3" class="form-control"></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
     </div>
-</div>
+    <br>
+
+    {% if post.comment_set %}
+    {% for comment in post.comment_set.iterator %}
+    <div class="media mb-4" id="comment-{{ comment.pk }}">
+        <img src="https://picsum.photos/seed/{{ comment.pk }}{{ comment.pk }}50/50" alt="" class="d-flex mr-3 rounded-circle">
+        <div class="media-body">
+            <h5 class="mt-0">
+                {{ comment.author.username }}&nbsp;&nbsp;&nbsp;<small class="text-muted">{{ comment.created_at }}</small>
+            </h5>
+            {{ comment.content | linebreaks }}
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
 </div>
 
 {% endblock %}
