@@ -39,10 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
 
-
     'blog',
     'single_pages',
     'crispy_forms',
+    'markdownx',
 ]
 
 MIDDLEWARE = [
