@@ -5,7 +5,7 @@
     Blog
     {% if user.is_authenticated %}
     {% if user.is_superuser or user.is_staff %}
-    <a type="button" href="/blog/create_post/" class="btn btn-info btn-sm float-right">
+    <a type="button" href="/blog/create_post/" class="btn btn-info btn-sm float-right m-2">
         <i class="fas fa-pen"></i>
         &nbsp;&nbsp;New Post</a>
     {% endif %}
@@ -19,57 +19,54 @@
     </span>
     {% endif %}
 </h1>
-
 {% if post_list.exists %}
-{% for p in post_list %}
-
-<div class="card mb-4" id="post-{{ p.id }}">
-    {% if p.head_image %}
-    <img src="{{ p.head_image.url }}" alt="" class="card-img-top">
-    {% else %}
-    <img src="https://picsum.photos/seed/{{ p.pk }}{{ p.pk }}/600/450" alt="">
-    {% endif %}
-    <div class="card-body">
-        {% if p.category %}
-        <span class="badge badge-primary float-right">{{ p.category }}</span>
+    {% for p in post_list %}
+    <div class="card mb-4" id="post-{{ p.id }}">
+        {% if p.head_image %}
+        <img src="{{ p.head_image.url }}" alt="" class="card-img-top">
         {% else %}
-        <span class="badge badge-primary float-right">미분류</span>
+        <img src="https://picsum.photos/seed/{{ p.pk }}{{ p.pk }}/800/450" alt="">
         {% endif %}
-        <h2 class="card-title">
-            {{ p.title }}
-        </h2>
-        {% if p.hook_text %}
-        <h5 class="text-muted">
-            {{ p.hook_text }}
-        </h5>
-        {% endif %}
+        <div class="card-body">
+            {% if p.category %}
+            <span class="badge badge-primary float-right">{{ p.category }}</span>
+            {% else %}
+            <span class="badge badge-primary float-right">미분류</span>
+            {% endif %}
+            <h2 class="card-title">
+                {{ p.title }}
+            </h2>
+            {% if p.hook_text %}
+            <h5 class="text-muted">
+                {{ p.hook_text }}
+            </h5>
+            {% endif %}
 
-        <p class="card-text">
-            {{ p.get_content_markdown | truncatewords_html:45 | safe }}
-        </p>
+            <p class="card-text">
+                {{ p.get_content_markdown | truncatewords_html:45 | safe }}
+            </p>
 
-        {% if p.tags.exists %}
-        <i class="fas fa-tags"></i>
-        {% for tag in p.tags.iterator %}
-        <span class="badge bg-light text-dark">
-                <a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
-                </span>
-        {% endfor %}
-        <br>
-        <br>
-        {% endif %}
+            {% if p.tags.exists %}
+            <i class="fas fa-tags"></i>
+            {% for tag in p.tags.iterator %}
+            <span class="badge bg-light text-dark">
+                    <a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
+                    </span>
+            {% endfor %}
+            <br>
+            <br>
+            {% endif %}
 
-        <a href="{{ p.get_absolute_url }}" class="btn btn-primary">
-            Read More &rarr;
-        </a>
+            <a href="{{ p.get_absolute_url }}" class="btn btn-primary">
+                Read More &rarr;
+            </a>
+        </div>
+        <div class="card-footer text-muted">
+            {{ p.created_at }} by <a href="#">{{ p.author | upper }}</a>
+        </div>
+
     </div>
-    <div class="card-footer text-muted">
-        {{ p.created_at }} by <a href="#">{{ p.author | upper }}</a>
-    </div>
-
-</div>
 {% endfor %}
-</div>
 {% else %}
 <h1>아직 게시물이 없습니다.</h1>
 {% endif %}
