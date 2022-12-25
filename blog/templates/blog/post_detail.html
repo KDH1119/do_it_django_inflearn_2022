@@ -109,10 +109,47 @@
     <div class="media mb-4" id="comment-{{ comment.pk }}">
         <img src="https://picsum.photos/seed/{{ comment.pk }}{{ comment.pk }}50/50" alt="" class="d-flex mr-3 rounded-circle">
         <div class="media-body">
+            {% if user.is_authenticated and comment.author == user %}
+            <div class="float-right">
+                <a role="button" class="btn btn-sm btn-primary"
+                   href="/blog/update_comment/{{ comment.pk }}/"
+                   id="comment-{{ comment.pk }}-update-btn">edit</a>
+                <a role="button" class="btn btn-sm btn-danger"
+                   href="#"
+                   data-toggle="modal"
+                   data-target="#deleteCommentModal-{{ comment.pk }}"
+                   id="comment-{{ comment.pk }}-delete-btn">delete</a>
+            </div>
+
+            <div class="modal fade" id="deleteCommentModal-{{ comment.pk }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="deleteCommentModal-{{ comment.pk }}-ModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteCommentModalLabel-{{ comment.pk }}">Are You Sure?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <del>{{ comment.content | linebreaks }}</del>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <a role="button" type="button" class="btn btn-danger"
+                               href="/blog/delete_comment/{{ comment.pk }}/">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
             <h5 class="mt-0">
                 {{ comment.author.username }}&nbsp;&nbsp;&nbsp;<small class="text-muted">{{ comment.created_at }}</small>
             </h5>
             {{ comment.content | linebreaks }}
+            {% if comment.is_updated %}
+            <p class="float-right text-muted">Updated: {{ comment.updated_at }}</p>
+            {% endif %}
         </div>
     </div>
     {% endfor %}
