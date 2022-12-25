@@ -193,7 +193,7 @@ class PostSearch(PostList):
     def get_queryset(self):
         q = self.kwargs['q']
         post_list = Post.objects.filter(
-            Q(title__contains=q) | Q(tags__name__contains=q)
+            Q(title__contains=q) | Q(tags__name__contains=q) | Q(hook_text__icontains=q) | Q(content__icontains=q)
         ).distinct()
         return post_list
     

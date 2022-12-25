@@ -23,6 +23,13 @@
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                        {% if user.socialaccount_set.first.get_avatar_url %}
+                        <img class="rounded-circle" width="30px" src="{{ user.socialaccount_set.first.get_avatar_url }}" alt="{{ user.username }}">
+                        {% else %}
+                        <img class="rounded-circle" width="30px"
+                             src="https://picsum.photos/seed/{{ user.pk }}{{ user.pk }}/30/30" alt="{{ user.username }}">
+                        {% endif %}
+                        &nbsp;
                         {{ user.username }}
                     </a>
                     <div class="dropdown-menu">
@@ -59,11 +66,11 @@
                             <a role="button" type="button" class="btn btn-outline-dark btn-block btn-sm"
                                href="{% provider_login_url 'google' %}"><i class="fab fa-google"></i> Log In with Google</a>
                             <a role="button" type="button" class="btn btn-outline-dark btn-block btn-sm"
-                            href="/accounts/login/"><i class="far fa-user"></i> Log In with Username</a>
+                               href="/accounts/login/"><i class="far fa-user"></i> Log In with Username</a>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <a role="button" type="button" class="btn btn-outline-dark btn-block btn-sm"
-                            href="/accounts/signup/"><i class="far fa-envelope"></i> Sign Up with E-mail</a>
+                               href="/accounts/signup/"><i class="far fa-envelope"></i> Sign Up with E-mail</a>
                         </div>
 
                     </div>

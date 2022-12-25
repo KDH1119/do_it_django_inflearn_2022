@@ -79,3 +79,9 @@ class Comment(models.Model):
 
     def is_updated(self):
         return self.updated_at - self.created_at > timedelta(seconds=1)
+
+    def get_avatar_url(self):
+        if self.author.socialaccount_set.exists():
+            return self.author.socialaccount_set.first().get_avatar_url()
+        else:
+            return f"https://picsum.photos/seed/{ self.author.pk }{ self.author.pk }/50/50"
