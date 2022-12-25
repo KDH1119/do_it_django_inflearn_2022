@@ -3,6 +3,13 @@
 {% block main_area %}
 <h1>
     Blog
+    {% if search_info %}
+    <small class="text-muted">
+        {{ search_info }}
+    </small>
+    {% endif %}
+
+
     {% if user.is_authenticated %}
     {% if user.is_superuser or user.is_staff %}
     <a type="button" href="/blog/create_post/" class="btn btn-info btn-sm float-right m-2">
@@ -20,78 +27,79 @@
     {% endif %}
 </h1>
 {% if post_list.exists %}
-    {% for p in post_list %}
-    <div class="card mb-4" id="post-{{ p.id }}">
-        {% if p.head_image %}
-        <img src="{{ p.head_image.url }}" alt="" class="card-img-top">
+{% for p in post_list %}
+<div class="card mb-4" id="post-{{ p.id }}">
+    {% if p.head_image %}
+    <img src="{{ p.head_image.url }}" alt="" class="card-img-top">
+    {% else %}
+    <img src="https://picsum.photos/seed/{{ p.pk }}{{ p.pk }}/800/450" alt="">
+    {% endif %}
+    <div class="card-body">
+        {% if p.category %}
+        <span class="badge badge-primary float-right">{{ p.category }}</span>
         {% else %}
-        <img src="https://picsum.photos/seed/{{ p.pk }}{{ p.pk }}/800/450" alt="">
+        <span class="badge badge-primary float-right">미분류</span>
         {% endif %}
-        <div class="card-body">
-            {% if p.category %}
-            <span class="badge badge-primary float-right">{{ p.category }}</span>
-            {% else %}
-            <span class="badge badge-primary float-right">미분류</span>
-            {% endif %}
-            <h2 class="card-title">
-                {{ p.title }}
-            </h2>
-            {% if p.hook_text %}
-            <h5 class="text-muted">
-                {{ p.hook_text }}
-            </h5>
-            {% endif %}
+        <h2 class="card-title">
+            {{ p.title }}
+        </h2>
+        {% if p.hook_text %}
+        <h5 class="text-muted">
+            {{ p.hook_text }}
+        </h5>
+        {% endif %}
 
-            <p class="card-text">
-                {{ p.get_content_markdown | truncatewords_html:45 | safe }}
-            </p>
+        <p class="card-text">
+            {{ p.get_content_markdown | truncatewords_html:45 | safe }}
+        </p>
 
-            {% if p.tags.exists %}
-            <i class="fas fa-tags"></i>
-            {% for tag in p.tags.iterator %}
-            <span class="badge bg-light text-dark">
+        {% if p.tags.exists %}
+        <i class="fas fa-tags"></i>
+        {% for tag in p.tags.iterator %}
+        <span class="badge bg-light text-dark">
                     <a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
                     </span>
-            {% endfor %}
-            <br>
-            <br>
-            {% endif %}
+        {% endfor %}
+        <br>
+        <br>
+        {% endif %}
 
-            <a href="{{ p.get_absolute_url }}" class="btn btn-primary">
-                Read More &rarr;
-            </a>
-        </div>
-        <div class="card-footer text-muted">
-            {{ p.created_at }} by <a href="#">{{ p.author | upper }}</a>
-        </div>
-
+        <a href="{{ p.get_absolute_url }}" class="btn btn-primary">
+            Read More &rarr;
+        </a>
     </div>
+    <div class="card-footer text-muted">
+        {{ p.created_at }} by <a href="#">{{ p.author | upper }}</a>
+    </div>
+
+</div>
 {% endfor %}
 {% else %}
 <h1>아직 게시물이 없습니다.</h1>
 {% endif %}
 {% if is_paginated %}
 <ul class="pagination justify-content-center mb-4">
-    {% if page_obj.has_next %}
-    <li class="page-item">
-        <a href="?page={{ page_obj.next_page_number }}" class="page-link"><-Older</a>
-    </li>
-    {% else %}
-    <li class="page-item disabled">
-        <a href="#" class="page-link"><-Older</a>
-    </li>
-    {% endif %}
 
     {% if page_obj.has_previous %}
     <li class="page-item">
-        <a href="?page={{ page_obj.previous_page_number }}" class="page-link">Newer-></a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="page-link"><-Newer</a>
     </li>
     {% else %}
     <li class="page-item disabled">
-        <a href="#" class="page-link">Newer-></a>
+        <a href="#" class="page-link"><-Newer</a>
     </li>
-
     {% endif %}
+
+    {% if page_obj.has_next %}
+    <li class="page-item">
+        <a href="?page={{ page_obj.next_page_number }}" class="page-link">Older-></a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+        <a href="#" class="page-link">Older-></a>
+    </li>
+    {% endif %}
+
 </ul>
 {% endif %}
 {% endblock %}

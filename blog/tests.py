@@ -359,7 +359,6 @@ class TestView(TestCase):
         self.assertNotIn('트롬프의 댓글입니다.', comment_area.text)
         self.assertEqual(Comment.objects.count(), 1)
 
-
     def test_category_page(self):
         response = self.client.get(self.category_programming.get_absolute_url())
         self.assertEqual(response.status_code, 200)
@@ -480,3 +479,25 @@ class TestView(TestCase):
         self.assertIn('한글 태그', main_area.text)
         self.assertIn('some tag', main_area.text)
         self.assertNotIn('python', main_area.text)
+
+    def test_search(self):
+        post_about_python = Post.objects.create(
+            title='파이썬에 대한 포스트입니다.',
+            content='hello world',
+            author=self.user_trump,
+
+        )
+
+        response = self.client.get('/blog/search/파이썬/')
+        self.assertEqual(response.status_code, 200)
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        main_area = soup.find('div', id='main-area')
+
+        self.assertIn('Search: 파이썬 (2)', main_area.text)
+        self.assertNotIn(self.post_001.title, main_area.text)
+        self.assertNotIn(self.post_002.title, main_area.text)
+        self.assertIn(self.post_003.title, main_area.text)
+        self.assertIn(post_about_python.title, main_area.text)
+
+
