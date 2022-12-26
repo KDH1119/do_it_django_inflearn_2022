@@ -7,22 +7,173 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>About KDH</title>
+
     <script src="https://kit.fontawesome.com/d3c2556ac4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'single_pages/css/about_me.css' %}" type="text/css">
 
 </head>
 <body>
-<nav>
-    <a href="/blog/">
-        <h1>Blog</h1>
-    </a>
-    <a href="/about_me/">
-        <h1>About me</h1>
-    </a>
-</nav>
+{% include 'blog/navbar.html' %}
 
-<h1>KDH (1996.11.19)</h1>
-<h2>Portfolio</h2>
+<section>
+    <div class="container mt-4">
+        <div class="row justify-content-between mt-4">
+            <div class="col-lg-8">
+                <h1>안녕하세요, 김덕현입니다.</h1>
+                <p class="lead">음악과 컴퓨터를 좋아합니다.
+                    <br>병원 통계 연구직을 직업으로 삼고 있습니다.</p>
+                <ul>
+                    <li>Work Experience</li>
+                    <li>공공빅데이터 청년인턴십 3기 (2020.08.~2021.02.)</li>
+                    <li>(주)에스투뷰텍 전략기획팀 (2021.03.~2021.12.)</li>
+                    <li>경북대학교병원 대구응급의료협력추진단 (2022.08.~)</li>
+                </ul>
+
+                <ul>
+                    <li>Programing Skills</li>
+                    <li>Python</li>
+                </ul>
+
+            </div>
+            <div class="col-lg-4">
+                <img width="80%" src="{% static 'single_pages/images/kdh.jpeg' %}" alt="" class="img-fluid">
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="bg-light margin-for-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>PORTFOLIO</h1>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card" data-toggle="modal" data-target="#pt1">
+                    <img src="{% static 'single_pages/images/7468.jpeg' %}" alt="" class="card-img-top img-fluid">
+                    <div class="card-body">
+                        <div class="card-title">
+                            대구시 공공빅데이터 분석경진대회
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card" data-toggle="modal" data-target="#pt2">
+                    <img src="{% static 'single_pages/images/7521.jpeg' %}" alt="" class="card-img-top img-fluid">
+                    <div class="card-body">
+                        <div class="card-title">
+                            빅데이터 청년인턴십 - DIP 빅데이터 활용센터 머신러닝 스터디
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card" data-toggle="modal" data-target="#pt3">
+                    <img src="{% static 'single_pages/images/7977.jpeg' %}" alt="" class="card-img-top img-fluid">
+                    <div class="card-body">
+                        <div class="card-title">
+                            BC카드 금융빅데이터 챌린지
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="pt1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ptLabel1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ptLabel1">대구시 공공빅데이터 분석경진대회 대상</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col-lg-7">
+                <img src="{% static 'single_pages/images/7468.jpeg' %}" alt="" class="card-img-top img-fluid">
+              </div>
+              <div class="col-lg-5">
+                <p>대구시 공공빅데이터 분석경진대회 공공부문 대상</p>
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="pt2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ptLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ptLabel2">DIP 빅데이터 활용센터 머신러닝 스터디</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col-lg-7">
+                <img src="{% static 'single_pages/images/7521.jpeg' %}" alt="" class="card-img-top img-fluid">
+              </div>
+              <div class="col-lg-5">
+                <p>DIP 빅데이터 활용센터 머신러닝 스터디</p>
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="pt3" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ptLabel3" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ptLabel3">BC카드 금융빅데이터 챌린지 대상</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col-lg-7">
+                <img src="{% static 'single_pages/images/7977.jpeg' %}" alt="" class="card-img-top img-fluid">
+              </div>
+              <div class="col-lg-5">
+                <p>BC카드 금융빅데이터 챌린지 대상</p>
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="fixed-bottom">
+    {% include 'blog/footer.html' %}
+</div>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
 </html>
