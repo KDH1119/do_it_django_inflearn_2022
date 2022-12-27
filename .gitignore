@@ -132,5 +132,7 @@ dmypy.json
 migrations/
 _media/
 
+env.prod
 .env.prod
+env.prod.db
 .env.prod.db
