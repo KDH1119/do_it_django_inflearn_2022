@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 .idea/
-migrations/
+# migrations/
 _media/
-.env.prod
-.env.prod.db
+# .env.prod
+# .env.prod.db
