@@ -7,7 +7,6 @@ WORKDIR /usr/src/app
 # set environment variable
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV PIP_ROOT_USER_ACTION=ignore
 
 COPY . /usr/src/app/
 
